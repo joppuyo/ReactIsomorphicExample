@@ -1,9 +1,12 @@
-var express = require('express')
-var app = express()
+var express = require('express');
+var app = express();
+var fs = require('fs');
 
-// respond with "hello world" when a GET request is made to the homepage
+app.use('/public', express.static('public'));
+
 app.get('/\*', function (req, res) {
-  res.send('hello world')
-})
+    var template = fs.readFileSync('index.nunjucks', 'utf-8');
+    res.send(template);
+});
 
 app.listen(3000);
