@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Router, Route, Link, browserHistory, IndexRedirect } from 'react-router';
 import { createStore, combineReducers } from 'redux'
 import { Provider } from 'react-redux'
 
