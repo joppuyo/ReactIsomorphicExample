@@ -4,6 +4,7 @@ import { Router, Route, Link, browserHistory, IndexRedirect } from 'react-router
 import { createStore, combineReducers } from 'redux'
 import { Provider } from 'react-redux'
 import axios from 'axios';
+import Helmet from 'react-helmet';
 
 import { ReduxAsyncConnect, asyncConnect, reducer as reduxAsyncConnect } from 'redux-connect'
 
@@ -45,6 +46,10 @@ class Page extends React.Component {
     render() {
         return (
             <div>
+                <Helmet
+                    defaultTitle="Acme"
+                    titleTemplate="%s - Acme"
+                />
                 <nav>
                     <ul>
                         <li>
@@ -77,6 +82,18 @@ class Content extends React.Component {
     render() {
         return (
             <div>
+                <Helmet
+                    title={this.props.content.title}
+                    meta={[
+                        {"name": "description", "content": this.props.content.description},
+                        {"property": "og:description", "content": this.props.content.description},
+                        {"property": "og:title", "content": `${this.props.content.title} - Acme`},
+                        {"name": "twitter:card", "content": "summary_large_image"},
+                        {"name": "twitter:site", "content": "@joppuyo"},
+                        {"name": "twitter:title", "content": `${this.props.content.title} - Acme`},
+                        {"name": "twitter:description", "content": this.props.content.description},
+                    ]}
+                />
                 <h1>{this.props.content.title}</h1>
                 <p>{this.props.content.body}</p>
             </div>
