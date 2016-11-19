@@ -3,10 +3,10 @@ import ReactDOM from 'react-dom';
 import { Router, Route, Link, browserHistory, IndexRedirect } from 'react-router';
 import { createStore, combineReducers } from 'redux'
 import { Provider } from 'react-redux'
-import axios from 'axios';
-import Helmet from 'react-helmet';
 
-import { ReduxAsyncConnect, asyncConnect, reducer as reduxAsyncConnect } from 'redux-connect'
+import App from './components/App.jsx';
+
+import { reducer as reduxAsyncConnect } from 'redux-connect'
 
 /*
 let counter = (state = {}, action) => {
@@ -28,78 +28,6 @@ store.subscribe(() =>
     console.log(store.getState())
 );
 */
-
-class App extends React.Component {
-    render() {
-        return (
-            <Router render={(props) => <ReduxAsyncConnect {...props}/>} history={browserHistory}>
-                <Route path="/" component={Page}>
-                    <IndexRedirect to="widgets" />
-                    <Route path=":pageSlug" component={Content}/>
-                </Route>
-            </Router>
-        );
-    }
-}
-
-class Page extends React.Component {
-    render() {
-        return (
-            <div>
-                <Helmet
-                    defaultTitle="Acme"
-                    titleTemplate="%s - Acme"
-                />
-                <nav>
-                    <ul>
-                        <li>
-                            <Link to="widgets">Widgets</Link>
-                        </li>
-                        <li>
-                            <Link to="gadgets">Gadgets</Link>
-                        </li>
-                        <li>
-                            <Link to="gizmos">Gizmos</Link>
-                        </li>
-                    </ul>
-                </nav>
-                {this.props.children}
-            </div>
-        );
-    }
-}
-
-@asyncConnect([{
-    key: 'content',
-    promise: ({ params, helpers }) => {
-        return axios.request(`/api/pages/${params.pageSlug}`).then((response) => {
-            console.log(response);
-            return response.data;
-        });
-    }
-}])
-class Content extends React.Component {
-    render() {
-        return (
-            <div>
-                <Helmet
-                    title={this.props.content.title}
-                    meta={[
-                        {"name": "description", "content": this.props.content.description},
-                        {"property": "og:description", "content": this.props.content.description},
-                        {"property": "og:title", "content": `${this.props.content.title} - Acme`},
-                        {"name": "twitter:card", "content": "summary_large_image"},
-                        {"name": "twitter:site", "content": "@joppuyo"},
-                        {"name": "twitter:title", "content": `${this.props.content.title} - Acme`},
-                        {"name": "twitter:description", "content": this.props.content.description},
-                    ]}
-                />
-                <h1>{this.props.content.title}</h1>
-                <p>{this.props.content.body}</p>
-            </div>
-        )
-    }
-}
 
 const store = createStore(combineReducers({ reduxAsyncConnect }), window.__data);
 
