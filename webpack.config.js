@@ -1,7 +1,7 @@
 module.exports = {
   entry: './browser.jsx',
   output: {
-    path: 'public/js',
+    path: __dirname + '/public/js',
     filename: 'bundle.js',
   },
   module: {

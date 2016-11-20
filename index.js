@@ -5,12 +5,12 @@ import { renderToString } from 'react-dom/server';
 import { match, RoutingContext } from 'react-router';
 import { ReduxAsyncConnect, loadOnServer, reducer as reduxAsyncConnect } from 'redux-connect';
 import nunjucks from 'nunjucks';
+import Helmet from 'react-helmet';
 
 import { Provider } from 'react-redux';
 import { createStore, combineReducers } from 'redux';
 import serialize from 'serialize-javascript';
 import routes from './components/Routes';
-import Helmet from 'react-helmet';
 
 const app = express();
 
