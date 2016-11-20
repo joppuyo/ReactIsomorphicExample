@@ -6,7 +6,8 @@ import Helmet from 'react-helmet';
 @asyncConnect([{
   key: 'content',
   promise: ({ params, helpers }) => {
-    return axios.request(`/api/pages/${params.pageSlug}`).then((response) => {
+    console.log('in async connect...');
+    return axios.request(`http://localhost:3000/api/pages/${params.pageSlug}`).then((response) => {
       console.log(response);
       return response.data;
     });

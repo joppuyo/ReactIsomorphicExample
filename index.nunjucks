@@ -1,12 +1,14 @@
 <!doctype html>
 
-<html lang="en">
+<html {{ htmlAttributes }}>
 <head>
   <meta charset="utf-8">
-  <title></title>
+  {{ title }}
+  {{ meta }}
 </head>
 <body>
-  <div id="content"></div>
+  <div id="content">{{ html }}</div>
+  <script>window.__data = {{data}}</script>
   <script src="public/js/bundle.js"></script>
 </body>
 </html>
