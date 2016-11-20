@@ -7,7 +7,8 @@ import Routes from './Routes';
 export default class App extends React.Component {
   render() {
     return (
-      <Router render={props => <ReduxAsyncConnect {...props} />} history={browserHistory} routes={Routes}>
+      <Router render={props => <ReduxAsyncConnect {...props} />} history={browserHistory}>
+        {Routes}
       </Router>
     );
   }
