@@ -14,6 +14,7 @@ import routes from './components/Routes';
 
 const app = express();
 
+// Serve static files (js, css) from the public directory
 app.use('/public', express.static('public'));
 
 app.get('/api/pages/:pageId', (request, response) => {
@@ -27,6 +28,7 @@ app.get('/api/pages/:pageId', (request, response) => {
   });
 });
 
+// Wildcard route which will match all routes we haven't defined above.
 app.get('/\*', (req, res) => {
   const store = createStore(combineReducers({ reduxAsyncConnect }));
   match({ routes, location: req.url }, (error, redirectLocation, renderProps) => {
@@ -36,10 +38,13 @@ app.get('/\*', (req, res) => {
       res.redirect(302, redirectLocation.pathname + redirectLocation.search);
     } else if (renderProps) {
       loadOnServer({ ...renderProps, store }).then(() => {
-        let error = store.getState().reduxAsyncConnect.loadState.content.error;
+        // Handle errors returned from the API in the app
+        const error = store.getState().reduxAsyncConnect.loadState.content.error;
         if (error && error.response && error.response.status === 500) {
+          // If we get error 500 from the API, return 500 from the app.
           res.status(500).send('Internal Server Error');
         } else if (error && error.response && error.response.status === 404) {
+          // If we get error 404 from the API, return 404 instead
           res.status(404).send('Not found');
         } else {
           const appHTML = renderToString(
@@ -51,6 +56,7 @@ app.get('/\*', (req, res) => {
 
           nunjucks.configure({ autoescape: false });
 
+          // Render static page with the data we got from the API
           const html = nunjucks.render('index.nunjucks',
             {
               html: appHTML,
