@@ -15,7 +15,7 @@ gulp.task('browser', function() {
     .pipe(gulp.dest('public/js/'));
 });
 
-gulp.task('nodemon', function() {
+gulp.task('nodemon', ['server'], function() {
   nodemon({
     script: 'build/index.js',
     watch: 'build',
