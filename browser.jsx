@@ -6,27 +6,6 @@ import { reducer as reduxAsyncConnect } from 'redux-connect';
 
 import App from './components/App';
 
-/*
-let counter = (state = {}, action) => {
-    if (action.type === 'GET_DATA') {
-        return {
-            "slug": "widgets",
-            "title": "Widgets",
-            "description": "Leverage agile frameworks to provide a robust synopsis for high level overviews.",
-            "body": "Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition. Organically grow the holistic world view of disruptive innovation via workplace diversity and empowerment."
-        }
-    }
-    return state;
-};
-
-let store = createStore(counter);
-
-
-store.subscribe(() =>
-    console.log(store.getState())
-);
-*/
-
 const store = createStore(combineReducers({ reduxAsyncConnect }), window.__data);
 
 ReactDOM.render(

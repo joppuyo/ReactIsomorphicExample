@@ -1,8 +1,6 @@
 import React from 'react';
 import { ReduxAsyncConnect } from 'redux-connect';
 import { Router, Route, browserHistory, IndexRedirect } from 'react-router';
-import Page from './Page';
-import Content from './Content';
 import Routes from './Routes';
 
 
