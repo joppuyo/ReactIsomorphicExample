@@ -2,6 +2,8 @@ var gulp = require('gulp');
 var babel = require('gulp-babel');
 var nodemon = require('gulp-nodemon');
 var webpack = require('gulp-webpack');
+var sass = require('gulp-sass');
+var autoprefixer = require('gulp-autoprefixer');
 
 gulp.task('server', function() {
   return gulp.src(['src/js/index.jsx', 'src/js/components/**/*.jsx'], { base: 'src/js/' })
@@ -25,6 +27,14 @@ gulp.task('nodemon', ['server'], function() {
 gulp.task('watch', function() {
   gulp.watch(['src/js/index.jsx', 'src/js/components/**/*.jsx', 'src/index.nunjucks'], ['server']);
   gulp.watch(['src/js/browser.jsx', 'src/js/components/**/*.jsx'], ['browser']);
+  gulp.watch(['src/scss/style.scss'], ['sass']);
 });
 
-gulp.task('default', ['watch', 'nodemon', 'browser', 'server']);
+gulp.task('sass', function () {
+    gulp.src('src/scss/style.scss')
+        .pipe(sass().on('error', sass.logError))
+        .pipe(autoprefixer())
+        .pipe(gulp.dest('public/css/'));
+});
+
+gulp.task('default', ['watch', 'nodemon', 'browser', 'server', 'sass']);

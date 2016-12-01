@@ -10,20 +10,30 @@ export default class Page extends React.Component {
           defaultTitle="Acme"
           titleTemplate="%s - Acme"
         />
-        <nav>
-          <ul>
+        <header className="header">
+        <nav className="navigation clearfix">
+          <Link className="header-logo" to="/" />
+          <ul className="clearfix">
             <li>
-              <Link to="widgets">Widgets</Link>
+              <Link to="widgets" activeClassName="active">Widgets</Link>
             </li>
             <li>
-              <Link to="gadgets">Gadgets</Link>
+              <Link to="gadgets" activeClassName="active">Gadgets</Link>
             </li>
             <li>
-              <Link to="gizmos">Gizmos</Link>
+              <Link to="gizmos" activeClassName="active">Gizmos</Link>
             </li>
           </ul>
         </nav>
+        </header>
+        <section className="content">
         {this.props.children}
+        </section>
+        <footer className="footer">
+          <div className="footer-inner">
+            &copy; ACME {new Date().getFullYear()}
+          </div>
+        </footer>
       </div>
     );
   }
