@@ -18,7 +18,7 @@ const app = express();
 app.use('/public', express.static('public'));
 
 app.get('/api/pages/:pageId', (request, response) => {
-  fs.readFile('fixtures/' + request.params.pageId + '.json', 'utf-8', (error, json) => {
+  fs.readFile('src/fixtures/' + request.params.pageId + '.json', 'utf-8', (error, json) => {
     if (error) {
       response.status(404).send('Not Found');
     } else {
@@ -57,7 +57,7 @@ app.get('/\*', (req, res) => {
           nunjucks.configure({ autoescape: false });
 
           // Render static page with the data we got from the API
-          const html = nunjucks.render('index.nunjucks',
+          const html = nunjucks.render('src/index.nunjucks',
             {
               html: appHTML,
               htmlAttributes: head.htmlAttributes.toString(),

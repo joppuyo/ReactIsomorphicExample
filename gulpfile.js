@@ -4,13 +4,13 @@ var nodemon = require('gulp-nodemon');
 var webpack = require('gulp-webpack');
 
 gulp.task('server', function() {
-  return gulp.src(['index.js', 'components/**/*.jsx'], { base: '.' })
+  return gulp.src(['src/js/index.jsx', 'src/js/components/**/*.jsx'], { base: 'src/js/' })
        .pipe(babel())
     .pipe(gulp.dest('build'));
 });
 
 gulp.task('browser', function() {
-  return gulp.src('browser.jsx')
+  return gulp.src('src/js/browser.jsx')
     .pipe(webpack(require('./webpack.config.js')))
     .pipe(gulp.dest('public/js/'));
 });
@@ -23,8 +23,8 @@ gulp.task('nodemon', ['server'], function() {
 });
 
 gulp.task('watch', function() {
-  gulp.watch(['index.js', 'components/**/*.jsx', 'index.nunjucks'], ['server']);
-  gulp.watch(['browser.jsx', 'components/**/*.jsx'], ['browser']);
+  gulp.watch(['src/js/index.jsx', 'src/js/components/**/*.jsx', 'src/index.nunjucks'], ['server']);
+  gulp.watch(['src/js/browser.jsx', 'src/js/components/**/*.jsx'], ['browser']);
 });
 
 gulp.task('default', ['watch', 'nodemon', 'browser', 'server']);

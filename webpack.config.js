@@ -1,5 +1,5 @@
 module.exports = {
-  entry: './browser.jsx',
+  entry: './src/js/browser.jsx',
   output: {
     path: __dirname + '/public/js',
     filename: 'bundle.js',
