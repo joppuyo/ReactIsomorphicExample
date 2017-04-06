@@ -6,8 +6,13 @@ var sass = require('gulp-sass');
 var autoprefixer = require('gulp-autoprefixer');
 
 gulp.task('server', function() {
-  return gulp.src(['src/js/index.jsx', 'src/js/components/**/*.jsx'], { base: 'src/js/' })
-       .pipe(babel())
+  return gulp.src(['src/js/config.js', 'src/js/index.jsx', 'src/js/components/**/*.jsx'], { base: 'src/js/' })
+    .pipe(babel())
+    .on('error', function(error) {
+      console.error(error.message);
+      console.error(error.codeFrame);
+      this.emit('end');
+    })
     .pipe(gulp.dest('build'));
 });
 
@@ -25,7 +30,7 @@ gulp.task('nodemon', ['server'], function() {
 });
 
 gulp.task('watch', function() {
-  gulp.watch(['src/js/index.jsx', 'src/js/components/**/*.jsx', 'src/index.nunjucks'], ['server']);
+  gulp.watch(['src/js/config.js','src/js/index.jsx', 'src/js/components/**/*.jsx', 'src/index.nunjucks'], ['server']);
   gulp.watch(['src/js/browser.jsx', 'src/js/components/**/*.jsx'], ['browser']);
   gulp.watch(['src/scss/style.scss'], ['sass']);
 });

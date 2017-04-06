@@ -26,9 +26,7 @@ export default class Page extends React.Component {
           </ul>
         </nav>
         </header>
-        <section className="content">
         {this.props.children}
-        </section>
         <footer className="footer">
           <div className="footer-inner">
             &copy; ACME {new Date().getFullYear()}

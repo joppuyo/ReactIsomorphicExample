@@ -11,6 +11,7 @@ import { Provider } from 'react-redux';
 import { createStore, combineReducers } from 'redux';
 import serialize from 'serialize-javascript';
 import routes from './components/Routes';
+import config from './config'
 
 const app = express();
 
@@ -74,4 +75,4 @@ app.get('/\*', (req, res) => {
   });
 });
 
-app.listen(3000);
+app.listen(config.port);

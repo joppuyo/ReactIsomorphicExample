@@ -4,6 +4,7 @@ $light-gray: #EEEEEE;
 
 body {
   height: 100%;
+  line-height: 1.5;
 }
 
 html {
@@ -67,6 +68,9 @@ body {
   max-width: 1024px;
   margin: 0 auto;
   padding: 20px;
+  & p:first-of-type {
+    margin-top: 0;
+  }
 }
 
 .header-logo {
@@ -88,4 +92,41 @@ footer {
   padding-left: 20px;
   line-height: 64px;
   opacity: 0.66;
+}
+
+.image-wrapper {
+  background-color: black;
+}
+
+.image {
+  height: 240px;
+  margin: 0 auto;
+  max-width: 1024px;
+  position: relative;
+  background-size: cover;
+  background-position: center;
+}
+
+.image-darken {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.image-text {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 40px;
+  color: white;
+  h1 {
+    margin-top: 16px;
+    margin-bottom: 0;
+  }
+  p {
+    opacity: 0.9;
+  }
 }
